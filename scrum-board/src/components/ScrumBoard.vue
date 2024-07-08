@@ -418,6 +418,7 @@ export default {
     margin-bottom: 10px;
     border-bottom: 1px solid #ccc;
     padding-bottom: 5px;
+    font-weight: bold;
   }
   
   .search-bar {
@@ -457,6 +458,7 @@ export default {
   .task h3 {
     font-size: 14px;
     margin: 0 0 5px;
+    font-weight: bold;
   }
   
   .task p {
