@@ -1,6 +1,6 @@
 <template>
   <div class="scrum-board">
-    <h1>SCRUM BOARD</h1>
+    <h1>AGILE SCRUM BOARD</h1>
     <div class="md">
     <div class="action-buttons">
       <button @click="showAddTaskForm" class="add-task-btn">Add Task</button>
