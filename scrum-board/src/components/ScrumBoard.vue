@@ -1,11 +1,13 @@
 <template>
   <div class="scrum-board">
     <h1>SCRUM BOARD</h1>
+    <div class="md">
     <div class="action-buttons">
       <button @click="showAddTaskForm" class="add-task-btn">Add Task</button>
       <button @click="exportTasks" class="export-tasks-btn">Export Tasks</button>
       <button @click="triggerFileInput" class="import-tasks-btn">Import Tasks</button>
       <input type="file" ref="fileInput" @change="importTasks" style="display: none;" accept=".json"/>
+    </div>
     </div>
 
     <div class="columns-container">
@@ -329,10 +331,12 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: black;
   }
 
   .scrum-board h1{
-    color: black;
+    margin-top: 30px;
+    color: white;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 5rem;
     margin-bottom: 10px;
@@ -344,6 +348,14 @@ export default {
     justify-content: flex-start;
     margin-bottom: 20px;
   }
+
+  .md{
+    height: 50px;
+    width: 100%;
+    background-color: #292b2c;
+    margin: 20px;
+    padding-top: 6px;
+  }
   
   .add-task-btn {
     padding: 10px 20px;
@@ -353,7 +365,8 @@ export default {
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    margin-right: 10px;
+    margin-right: 5px;
+    margin-left: 10px;
   }
 
   .import-tasks-btn {
@@ -364,7 +377,7 @@ export default {
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    margin-right: 10px;
+    margin-right: 5px;
   }
 
   .export-tasks-btn{
@@ -375,7 +388,7 @@ export default {
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    margin-right: 10px;
+    margin-right: 5px;
   }
   
   .columns-container {
@@ -383,11 +396,13 @@ export default {
     justify-content: space-around;
     width: 100%;
     margin-bottom: 20px;
+    margin: 0%;
+    padding: 0%;
   }
   
   .column {
     flex: 1;
-    min-width: 175px;
+    min-width: 187px;
     max-width: 300px;
     border: 1px solid #ccc;
     border-radius: 4px;
