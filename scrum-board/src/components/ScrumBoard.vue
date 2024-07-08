@@ -38,7 +38,7 @@
                 <p>Spent Time: {{ task.spentTime }} hours</p>
               </div>
             </transition>
-            <a href="#" @click.prevent="openEditForm(task)">Edit Task</a>
+            <a href="#" @click.prevent="openEditForm(task)" class="edit">Edit Task</a>
           </div>
         </div>
       </div>
@@ -111,7 +111,6 @@
 
           <label for="edit-task-priority">Priority:</label>
           <select id="edit-task-priority" v-model="editedTask.priority">
-            <option value="low">Low</option>
             <option value="normal">Normal</option>
             <option value="high">High</option>
           </select>
@@ -366,6 +365,24 @@ export default {
   100% {
       transform: scale(1);
   }
+}
+
+.edit{
+  padding: 5px 10px;
+    font-size: 12px;
+    background-color: #000103;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 5px;
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+.edit:hover{
+  animation: pulse 0.5s ease-in-out forwards;
+  background-color: #343435;
 }
   
   .add-task-btn {
