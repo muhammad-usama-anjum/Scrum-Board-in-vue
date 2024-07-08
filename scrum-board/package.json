@@ -16,7 +16,8 @@
     "vue": "^3.4.29",
     "vue-draggable-next": "^2.2.1",
     "vuedraggable": "^2.24.3",
-    "vuex": "^4.0.2"
+    "vuex": "^4.0.2",
+    "@vue/cli-service": "^4.5.0"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.8.0",
