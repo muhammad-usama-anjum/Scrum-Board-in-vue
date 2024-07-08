@@ -206,7 +206,7 @@ export default {
       if (this.dragStartColumnIndex !== null && this.dragStartTaskIndex !== null) {
         const draggedTask = this.columns[this.dragStartColumnIndex].tasks.splice(this.dragStartTaskIndex, 1)[0];
         this.columns[dropColumnIndex].tasks.push(draggedTask);
-        this.saveTasksToLocalStorage(); // Save changes to localStorage
+        this.saveTasksToLocalStorage(); 
       }
     },
     showAddTaskForm() {
@@ -323,12 +323,12 @@ export default {
   }
 };
 </script>
+
   <style scoped>
   .scrum-board {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
   }
 
   .scrum-board h1{
