@@ -338,6 +338,7 @@ export default {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 5rem;
     margin-bottom: 10px;
+    font-weight: bold;
   }
   
   .action-buttons {
