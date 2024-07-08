@@ -71,7 +71,6 @@
 
           <label for="task-priority">Priority:</label>
           <select id="task-priority" v-model="task.priority">
-            <option value="low">Low</option>
             <option value="normal">Normal</option>
             <option value="high">High</option>
           </select>
@@ -356,6 +355,18 @@ export default {
     margin: 20px;
     padding-top: 6px;
   }
+
+  @keyframes pulse {
+  0% {
+      transform: scale(1);
+  }
+  50% {
+      transform: scale(1.05);
+  }
+  100% {
+      transform: scale(1);
+  }
+}
   
   .add-task-btn {
     padding: 10px 20px;
@@ -367,6 +378,13 @@ export default {
     cursor: pointer;
     margin-right: 5px;
     margin-left: 10px;
+    font-weight: bold;
+  }
+
+  .add-task-btn:hover{
+    animation: pulse 0.5s ease-in-out forwards;
+    background-color: #195b86;
+
   }
 
   .import-tasks-btn {
@@ -378,7 +396,15 @@ export default {
     border-radius: 4px;
     cursor: pointer;
     margin-right: 5px;
+    font-weight: bold;
   }
+
+  .import-tasks-btn:hover{
+    animation: pulse 0.5s ease-in-out forwards;
+    background-color: #195b86;
+
+  }
+
 
   .export-tasks-btn{
     padding: 10px 20px;
@@ -389,7 +415,15 @@ export default {
     border-radius: 4px;
     cursor: pointer;
     margin-right: 5px;
+    font-weight: bold;
   }
+
+  .export-tasks-btn:hover{
+    animation: pulse 0.5s ease-in-out forwards;
+    background-color: #195b86;
+
+  }
+
   
   .columns-container {
     display: flex;
@@ -448,11 +482,23 @@ export default {
   }
   
   .task.high {
-    background-color: #ffcccc;
+    background-color: #f59292;
+  }
+
+  .task.high:hover{
+    animation: pulse 0.5s ease-in-out forwards;
+    background-color: #f53a3a;
+
   }
   
   .task.normal {
     background-color: #cce5ff;
+  }
+
+  .task.normal:hover{
+    animation: pulse 0.5s ease-in-out forwards;
+    background-color: #47b6f7;
+
   }
   
   .task h3 {
