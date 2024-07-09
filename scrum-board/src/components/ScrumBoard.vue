@@ -662,5 +662,50 @@ export default {
     background-color: #0056b3;
   }
   
+  @media (max-width: 768px) {
+    .scrum-board h1 {
+      font-size: 3rem;
+    }
+    
+    .add-task-btn, .import-tasks-btn, .export-tasks-btn, .edit {
+      padding: 5px 10px;
+      font-size: 12px;
+    }
+
+    .task-form {
+      width: 90%;
+    }
+
+    .form-buttons {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .form-buttons button {
+      width: 100%;
+      margin-bottom: 5px;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .scrum-board h1 {
+      font-size: 2.5rem;
+    }
+
+    .columns-container {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .column {
+      width: 100%;
+      max-width: 100%;
+      margin: 5px 0;
+    }
+
+    .task-form {
+      width: 95%;
+    }
+  }
   </style>
   
