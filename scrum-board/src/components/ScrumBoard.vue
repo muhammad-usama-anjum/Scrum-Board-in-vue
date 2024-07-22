@@ -212,20 +212,21 @@ export default {
   },
   methods: {
     onDragStart(task, columnIndex, taskIndex) {
-      this.dragStartColumnIndex = columnIndex;
-      this.dragStartTaskIndex = taskIndex;
-    },
-    onDragEnd() {
-      this.dragStartColumnIndex = null;
-      this.dragStartTaskIndex = null;
-    },
-    onDrop(dropColumnIndex) {
-      if (this.dragStartColumnIndex !== null && this.dragStartTaskIndex !== null) {
-        const draggedTask = this.columns[this.dragStartColumnIndex].tasks.splice(this.dragStartTaskIndex, 1)[0];
-        this.columns[dropColumnIndex].tasks.push(draggedTask);
-        this.saveTasksToLocalStorage(); 
-      }
-    },
+    this.dragStartColumnIndex = columnIndex;
+    this.dragStartTaskIndex = taskIndex;
+  },
+  onDragEnd() {
+    this.dragStartColumnIndex = null;
+    this.dragStartTaskIndex = null;
+  },
+  onDrop(dropColumnIndex) {
+    if (this.dragStartColumnIndex !== null && this.dragStartTaskIndex !== null) {
+      const draggedTask = this.columns[this.dragStartColumnIndex].tasks.splice(this.dragStartTaskIndex, 1)[0];
+      draggedTask.status = this.columns[dropColumnIndex].title;
+      this.columns[dropColumnIndex].tasks.push(draggedTask);
+      this.saveTasksToLocalStorage();
+    }
+  },
     showAddTaskForm() {
       this.showForm = true;
     },
