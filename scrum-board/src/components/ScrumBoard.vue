@@ -340,13 +340,18 @@ export default {
     margin-bottom: 10px;
     font-weight: bold;
   }
+  .action-buttons.add-task-btn{
+    justify-content: flex-start;
+  }
   
   .action-buttons {
     width: 100%;
     display: flex;
-    justify-content: flex-start;
+    justify-content: flex-end;
     margin-bottom: 20px;
   }
+
+ 
 
   .md{
     height: 50px;
@@ -387,6 +392,7 @@ export default {
 }
   
   .add-task-btn {
+    justify-content: flex-start;
     padding: 10px 20px;
     font-size: 16px;
     background-color: #007bff;
@@ -394,7 +400,7 @@ export default {
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    margin-right: 5px;
+    margin-right: 20px;
     margin-left: 10px;
     font-weight: bold;
   }
@@ -413,8 +419,10 @@ export default {
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    margin-right: 5px;
+    margin-right: 10px;
     font-weight: bold;
+    float: right;
+
   }
 
   .import-tasks-btn:hover{
@@ -432,7 +440,7 @@ export default {
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    margin-right: 5px;
+    margin-right: 20px;
     font-weight: bold;
   }
 
