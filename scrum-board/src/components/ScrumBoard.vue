@@ -45,43 +45,50 @@
     </div>
 
     <div v-if="showForm" class="task-form-overlay">
-      <div class="task-form">
-        <h2>Add New Task</h2>
-        <form @submit.prevent="submitTask">
-          <label for="task-title">Title:</label>
-          <input type="text" id="task-title" v-model="task.title" required />
-          <label for="task-description">Description:</label>
-          <textarea id="task-description" v-model="task.description"></textarea>
+    <div class="task-form">
+      <h2>Add New Task</h2>
+      <form @submit.prevent="submitTask">
+        <label for="task-title">Title:</label>
+        <input type="text" id="task-title" v-model="task.title" required />
 
-          <label for="task-assignee">Assignee:</label>
-          <input type="text" id="task-assignee" v-model="task.assignee" />
+        <label for="task-description">Description:</label>
+        <textarea id="task-description" v-model="task.description"></textarea>
 
-          <label for="task-due-date">Due Date:</label>
-          <input type="date" id="task-due-date" v-model="task.dueDate" />
+        <label for="task-assignee">Assignee:</label>
+        <input type="text" id="task-assignee" v-model="task.assignee" />
 
-          <label for="task-status">Status:</label>
-          <select id="task-status" v-model="task.status">
-            <option value="todo">To Do</option>
-            <option value="inProgress">In Progress</option>
-            <option value="done">Done</option>
-          </select>
+        <label for="task-due-date">Due Date:</label>
+        <input type="date" id="task-due-date" v-model="task.dueDate" :min="todayDate" />
 
-          <label for="task-spent-time">Spent Time (hours):</label>
-          <input type="number" id="task-spent-time" v-model.number="task.spentTime" />
+        <label for="task-status">Status:</label>
+        <select id="task-status" v-model="task.status">
+          <option value="Todo">To Do</option>
+            <option value="Open">Open</option>
+            <option value="New task">New Task</option>
+            <option value="In progress">In Progress</option>
+            <option value="Feedback needed">Feedback needed</option>
+            <option value="Ready for testing">Ready for testing</option>
+            <option value="QA in progress">QA in progress</option>
+            <option value="Done">Done</option>
+        </select>
 
-          <label for="task-priority">Priority:</label>
-          <select id="task-priority" v-model="task.priority">
-            <option value="normal">Normal</option>
-            <option value="high">High</option>
-          </select>
+        <label for="task-spent-time">Spent Time (hours):</label>
+        <input type="number" id="task-spent-time" v-model.number="task.spentTime" :min="0" />
 
-          <div class="form-buttons">
-            <button type="submit">Submit</button>
-            <button type="button" @click="closeForm">Cancel</button>
-          </div>
-        </form>
-      </div>
+        <label for="task-priority">Priority:</label>
+        <select id="task-priority" v-model="task.priority">
+          <option value="low">Low</option>
+          <option value="normal">Normal</option>
+          <option value="high">High</option>
+        </select>
+
+        <div class="form-buttons">
+          <button type="submit">Submit</button>
+          <button type="button" @click="closeForm">Cancel</button>
+        </div>
+      </form>
     </div>
+  </div>
 
     <div v-if="editingTask" class="task-form-overlay">
       <div class="task-form">
@@ -101,9 +108,14 @@
 
           <label for="edit-task-status">Status:</label>
           <select id="edit-task-status" v-model="editedTask.status">
-            <option value="todo">To Do</option>
-            <option value="inProgress">In Progress</option>
-            <option value="done">Done</option>
+            <option value="Todo">To Do</option>
+            <option value="Open">Open</option>
+            <option value="New task">New Task</option>
+            <option value="In progress">In Progress</option>
+            <option value="Feedback needed">Feedback needed</option>
+            <option value="Ready for testing">Ready for testing</option>
+            <option value="QA in progress">QA in progress</option>
+            <option value="Done">Done</option>
           </select>
 
           <label for="edit-task-spent-time">Spent Time (hours):</label>
@@ -111,6 +123,7 @@
 
           <label for="edit-task-priority">Priority:</label>
           <select id="edit-task-priority" v-model="editedTask.priority">
+            <option value="low">Low</option>
             <option value="normal">Normal</option>
             <option value="high">High</option>
           </select>
@@ -179,7 +192,8 @@ export default {
         { title: "QA in Progress", tasks: [] },
       ],
       dragStartColumnIndex: null,
-      dragStartTaskIndex: null
+      dragStartTaskIndex: null,
+      todayDate: new Date().toISOString().split('T')[0]
     };
   },
   computed: {
@@ -216,11 +230,22 @@ export default {
       this.showForm = false;
     },
     submitTask() {
+      if (!this.task.dueDate || new Date(this.task.dueDate) < new Date(this.todayDate)) {
+        alert("The due date cannot be in the past.");
+        return;
+      }
+      
+      if (this.task.spentTime < 0) {
+        alert("Spent time cannot be less than 0.");
+        return;
+      }
+      
       this.columns[0].tasks.push({ ...this.task });
       this.resetTaskForm();
       this.showForm = false;
       this.saveTasksToLocalStorage();
     },
+
     openTaskDetails(task) {
       this.activeTask = task;
     },
@@ -520,6 +545,16 @@ export default {
     cursor: pointer;
     transition: background-color 0.3s;
   }
+
+  .task.low{
+    background-color: #e1e452;
+  }
+
+  .task.low:hover{
+    animation: pulse 0.5s ease-in-out forwards;
+    background-color: #fff020;
+
+  }
   
   .task.high {
     background-color: #f59292;
@@ -578,6 +613,8 @@ export default {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-height: 80vh; /* Adjust this value as needed */
+  overflow-y: auto;
   }
   
   .task-form h2 {
