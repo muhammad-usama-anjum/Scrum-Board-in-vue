@@ -2,12 +2,15 @@
   <div class="scrum-board">
     <h1>AGILE SCRUM BOARD</h1>
     <div class="md">
-    <div class="action-buttons">
-      <button @click="showAddTaskForm" class="add-task-btn">Add Task</button>
-      <button @click="exportTasks" class="export-tasks-btn">Export Tasks</button>
-      <button @click="triggerFileInput" class="import-tasks-btn">Import Tasks</button>
-      <input type="file" ref="fileInput" @change="importTasks" style="display: none;" accept=".json"/>
-    </div>
+      <div class="action-buttons">
+  <button @click="showAddTaskForm" class="add-task-btn">Add Task</button>
+  <div class="action-buttons-right">
+    <button @click="exportTasks" class="export-tasks-btn">Export Tasks</button>
+    <button @click="triggerFileInput" class="import-tasks-btn">Import Tasks</button>
+    <input type="file" ref="fileInput" @change="importTasks" style="display: none;" accept=".json"/>
+  </div>
+</div>
+
     </div>
 
     <div class="columns-container">
@@ -379,16 +382,20 @@ export default {
     margin-bottom: 5px;
     font-weight: bold;
   }
-  .action-buttons.add-task-btn{
-    justify-content: flex-start;
-  }
+ 
   
   .action-buttons {
     width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between; 
+  margin-bottom: 20px;
+  padding: 0 20px;
   }
+
+  .action-buttons-right {
+  display: flex;
+  align-items: center;
+}
 
  
 
