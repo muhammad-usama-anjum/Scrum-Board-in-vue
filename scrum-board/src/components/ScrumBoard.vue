@@ -55,16 +55,16 @@
         <input type="text" id="task-title" v-model="task.title" required />
 
         <label for="task-description">Description:</label>
-        <textarea id="task-description" v-model="task.description"></textarea>
+        <textarea id="task-description" v-model="task.description" required></textarea>
 
         <label for="task-assignee">Assignee:</label>
-        <input type="text" id="task-assignee" v-model="task.assignee" />
+        <input type="text" id="task-assignee" v-model="task.assignee" required/>
 
         <label for="task-due-date">Due Date:</label>
-        <input type="date" id="task-due-date" v-model="task.dueDate" :min="todayDate" />
+        <input type="date" id="task-due-date" v-model="task.dueDate" :min="todayDate" required />
 
         <label for="task-status">Status:</label>
-        <select id="task-status" v-model="task.status">
+        <select id="task-status" v-model="task.status" required>
           <option value="Todo">To Do</option>
             <option value="Open">Open</option>
             <option value="New task">New Task</option>
@@ -76,10 +76,10 @@
         </select>
 
         <label for="task-spent-time">Spent Time (hours):</label>
-        <input type="number" id="task-spent-time" v-model.number="task.spentTime" :min="0" />
+        <input type="number" id="task-spent-time" v-model.number="task.spentTime" :min="0" required />
 
         <label for="task-priority">Priority:</label>
-        <select id="task-priority" v-model="task.priority">
+        <select id="task-priority" v-model="task.priority" required>
           <option value="low">Low</option>
           <option value="normal">Normal</option>
           <option value="high">High</option>
