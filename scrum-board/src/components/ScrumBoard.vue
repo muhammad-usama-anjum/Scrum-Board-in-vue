@@ -289,21 +289,35 @@ export default {
       this.$refs.fileInput.click();
     },
     importTasks(event) {
-      const file = event.target.files[0];
-      if (!file) return;
+    const file = event.target.files[0];
+    if (!file) return;
 
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        try {
-          const data = JSON.parse(e.target.result);
-          this.columns = data;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        const importedData = JSON.parse(e.target.result);
+        
+        // Check if the imported data has columns
+        if (Array.isArray(importedData)) {
+          // Merge tasks into existing columns
+          this.columns.forEach((column, index) => {
+            if (importedData[index]) {
+              // Merge tasks by appending
+              column.tasks = [...column.tasks, ...importedData[index].tasks];
+            }
+          });
+          
           this.saveTasksToLocalStorage();
-        } catch (error) {
-          alert("Invalid JSON file.");
+        } else {
+          alert("Invalid data format. Make sure the JSON file contains an array of columns.");
         }
-      };
-      reader.readAsText(file);
-    },
+      } catch (error) {
+        alert("Invalid JSON file.");
+      }
+    };
+    reader.readAsText(file);
+  },
+
     saveTasksToLocalStorage() {
       localStorage.setItem('scrumBoardColumns', JSON.stringify(this.columns));
     },
