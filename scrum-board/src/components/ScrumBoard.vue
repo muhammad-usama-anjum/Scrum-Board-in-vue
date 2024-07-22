@@ -372,11 +372,11 @@ export default {
   }
 
   .scrum-board h1{
-    margin-top: 30px;
+    margin-top: 20px;
     color: white;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 5rem;
-    margin-bottom: 10px;
+    font-size: 1.5rem;
+    margin-bottom: 5px;
     font-weight: bold;
   }
   .action-buttons.add-task-btn{
