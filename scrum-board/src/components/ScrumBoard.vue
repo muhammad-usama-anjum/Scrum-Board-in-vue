@@ -136,12 +136,24 @@
             required
           />
 
-          <label for="edit-task-priority">Priority:</label>
-          <select id="edit-task-priority" v-model="editedTask.priority" required>
-            <option value="low">Low</option>
-            <option value="normal">Normal</option>
-            <option value="high">High</option>
-          </select>
+          <div class="edit-task-priority">
+  <label>Priority:</label>
+  <div class="priority-options">
+    <label>
+      <input type="radio" name="edit-task-priority" value="low" v-model="editedTask.priority" />
+      Low
+    </label>
+    <label>
+      <input type="radio" name="edit-task-priority" value="normal" v-model="editedTask.priority" />
+      Normal
+    </label>
+    <label>
+      <input type="radio" name="edit-task-priority" value="high" v-model="editedTask.priority" />
+      High
+    </label>
+  </div>
+</div>
+
 
           <div class="form-buttons">
             <button type="submit">Submit</button>
@@ -575,6 +587,38 @@ export default {
   cursor: pointer;
   transition: background-color 0.3s;
 }
+
+.edit-task-priority {
+  margin: 10px 0;
+}
+
+.edit-task-priority label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.priority-options {
+  display: flex;
+  gap: 10px;
+}
+
+.priority-options label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.priority-options input[type="radio"] {
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+/* Optional: Style for selected radio button */
+.priority-options input[type="radio"]:checked {
+  accent-color: #007bff;
+}
+
 
 .task.low {
   background-color: #e1e452;
