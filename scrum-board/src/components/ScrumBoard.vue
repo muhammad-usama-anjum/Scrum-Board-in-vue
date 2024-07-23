@@ -102,16 +102,16 @@
           <input type="text" id="edit-task-title" v-model="editedTask.title" required />
 
           <label for="edit-task-description">Description:</label>
-          <textarea id="edit-task-description" v-model="editedTask.description"></textarea>
+          <textarea id="edit-task-description" v-model="editedTask.description" required></textarea>
 
           <label for="edit-task-assignee">Assignee:</label>
-          <input type="text" id="edit-task-assignee" v-model="editedTask.assignee" />
+          <input type="text" id="edit-task-assignee" v-model="editedTask.assignee" required/>
 
           <label for="edit-task-due-date">Due Date:</label>
-          <input type="date" id="edit-task-due-date" v-model="editedTask.dueDate" />
+          <input type="date" id="edit-task-due-date" v-model="editedTask.dueDate" required/>
 
           <label for="edit-task-status">Status:</label>
-          <select id="edit-task-status" v-model="editedTask.status">
+          <select id="edit-task-status" v-model="editedTask.status" required>
             <option value="Todo">To Do</option>
             <option value="Open">Open</option>
             <option value="New task">New Task</option>
@@ -122,11 +122,13 @@
             <option value="Done">Done</option>
           </select>
 
+
           <label for="edit-task-spent-time">Spent Time (hours):</label>
-          <input type="number" id="edit-task-spent-time" v-model.number="editedTask.spentTime" />
+<input type="number" id="edit-task-spent-time" v-model.number="task.spentTime" :min="0" step="0.01" required />
+
 
           <label for="edit-task-priority">Priority:</label>
-          <select id="edit-task-priority" v-model="editedTask.priority">
+          <select id="edit-task-priority" v-model="editedTask.priority" required>
             <option value="low">Low</option>
             <option value="normal">Normal</option>
             <option value="high">High</option>
