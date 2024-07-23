@@ -48,40 +48,39 @@
     </div>
 
     <div v-if="showForm" class="task-form-overlay">
-    <div class="task-form">
-      <h2>Add New Task</h2>
-      <form @submit.prevent="submitTask">
-        <label for="task-title">Title:</label>
-        <input type="text" id="task-title" v-model="task.title" required />
+      <div class="task-form">
+        <h2>Add New Task</h2>
+        <form @submit.prevent="submitTask">
+          <!-- Existing form fields remain unchanged -->
+          <label for="task-title">Title:</label>
+          <input type="text" id="task-title" v-model="task.title" required />
 
-        <label for="task-description">Description:</label>
-        <textarea id="task-description" v-model="task.description" required></textarea>
+          <label for="task-description">Description:</label>
+          <textarea id="task-description" v-model="task.description" required></textarea>
 
-        <label for="task-assignee">Assignee:</label>
-        <input type="text" id="task-assignee" v-model="task.assignee" required/>
+          <label for="task-assignee">Assignee:</label>
+          <input type="text" id="task-assignee" v-model="task.assignee" required/>
 
-        <label for="task-due-date">Due Date:</label>
-        <input type="date" id="task-due-date" v-model="task.dueDate" :min="todayDate" required />
+          <label for="task-due-date">Due Date:</label>
+          <input type="date" id="task-due-date" v-model="task.dueDate" :min="todayDate" required />
 
+          <label for="task-spent-time">Spent Time (hours):</label>
+          <input type="number" id="task-spent-time" v-model.number="task.spentTime" :min="0" step="0.01" required />
 
-        <label for="task-spent-time">Spent Time (hours):</label>
-<input type="number" id="task-spent-time" v-model.number="task.spentTime" :min="0" step="0.01" required />
+          <label for="task-priority">Priority:</label>
+          <select id="task-priority" v-model="task.priority" required>
+            <option value="low">Low</option>
+            <option value="normal">Normal</option>
+            <option value="high">High</option>
+          </select>
 
-
-        <label for="task-priority">Priority:</label>
-        <select id="task-priority" v-model="task.priority" required>
-          <option value="low">Low</option>
-          <option value="normal">Normal</option>
-          <option value="high">High</option>
-        </select>
-
-        <div class="form-buttons">
-          <button type="submit">Submit</button>
-          <button type="button" @click="closeForm">Cancel</button>
-        </div>
-      </form>
+          <div class="form-buttons">
+            <button type="submit">Submit</button>
+            <button type="button" @click="closeForm">Cancel</button>
+          </div>
+        </form>
+      </div>
     </div>
-  </div>
 
     <div v-if="editingTask" class="task-form-overlay">
       <div class="task-form">
@@ -136,12 +135,14 @@
 </template>
 
 <script>
+import { v4 as uuidv4 } from 'uuid';
 export default {
   data() {
     return {
       searchQuery: '',
       showForm: false,
       task: {
+        id: '', // Add an ID field
         title: '',
         description: '',
         assignee: '',
@@ -152,6 +153,7 @@ export default {
       },
       editingTask: null,
       editedTask: {
+        id: '', // Add an ID field
         title: '',
         description: '',
         assignee: '',
@@ -160,14 +162,11 @@ export default {
         spentTime: 0,
         priority: 'normal'
       },
-      activeTask: null, 
+      activeTask: null,
       showModal: false,
       modalTask: null,
       columns: [
-        {
-          title: "Backlog",
-          tasks: [],
-        },
+        { title: "Backlog", tasks: [] },
         { title: "Open", tasks: [] },
         { title: "New Tasks", tasks: [] },
         { title: "In Progress", tasks: [] },
@@ -193,21 +192,21 @@ export default {
   },
   methods: {
     onDragStart(task, columnIndex, taskIndex) {
-    this.dragStartColumnIndex = columnIndex;
-    this.dragStartTaskIndex = taskIndex;
-  },
-  onDragEnd() {
-    this.dragStartColumnIndex = null;
-    this.dragStartTaskIndex = null;
-  },
-  onDrop(dropColumnIndex) {
-    if (this.dragStartColumnIndex !== null && this.dragStartTaskIndex !== null) {
-      const draggedTask = this.columns[this.dragStartColumnIndex].tasks.splice(this.dragStartTaskIndex, 1)[0];
-      draggedTask.status = this.columns[dropColumnIndex].title;
-      this.columns[dropColumnIndex].tasks.push(draggedTask);
-      this.saveTasksToLocalStorage();
-    }
-  },
+      this.dragStartColumnIndex = columnIndex;
+      this.dragStartTaskIndex = taskIndex;
+    },
+    onDragEnd() {
+      this.dragStartColumnIndex = null;
+      this.dragStartTaskIndex = null;
+    },
+    onDrop(dropColumnIndex) {
+      if (this.dragStartColumnIndex !== null && this.dragStartTaskIndex !== null) {
+        const draggedTask = this.columns[this.dragStartColumnIndex].tasks.splice(this.dragStartTaskIndex, 1)[0];
+        draggedTask.status = this.columns[dropColumnIndex].title;
+        this.columns[dropColumnIndex].tasks.push(draggedTask);
+        this.saveTasksToLocalStorage();
+      }
+    },
     showAddTaskForm() {
       this.showForm = true;
     },
@@ -225,6 +224,7 @@ export default {
         return;
       }
       
+      this.task.id = uuidv4(); // Generate a unique ID for the task
       this.columns[0].tasks.push({ ...this.task });
       this.resetTaskForm();
       this.showForm = false;
@@ -232,7 +232,8 @@ export default {
     },
 
     openTaskDetails(task) {
-      this.activeTask = task;
+      this.modalTask = task;
+      this.showModal = true;
     },
     openEditForm(task) {
       this.editedTask = { ...task };
@@ -250,41 +251,32 @@ export default {
     },
     resetTaskForm() {
       this.task = {
+        id: '', // Reset ID
         title: '',
         description: '',
         assignee: '',
         dueDate: '',
-        status: 'todo',
+        status: 'Backlog',
         spentTime: 0,
         priority: 'normal'
       };
     },
     resetEditedTaskForm() {
       return {
+        id: '', // Reset ID
         title: '',
         description: '',
         assignee: '',
         dueDate: '',
-        status: 'todo',
+        status: 'Backlog',
         spentTime: 0,
         priority: 'normal'
       };
     },
-    openTaskDetails(task) {
-        this.modalTask = task;
-        this.showModal = true;
-      },
-      closeModal() {
-        this.showModal = false;
-        this.modalTask = null;
-      },
-      toggleTaskDetails(task) {
-        if (this.activeTask === task) {
-          this.activeTask = null; 
-        } else {
-          this.activeTask = task; 
-        }
-      },
+    closeModal() {
+      this.showModal = false;
+      this.modalTask = null;
+    },
     exportTasks() {
       const data = JSON.stringify(this.columns);
       const blob = new Blob([data], { type: "application/json" });
@@ -299,34 +291,50 @@ export default {
       this.$refs.fileInput.click();
     },
     importTasks(event) {
-    const file = event.target.files[0];
-    if (!file) return;
+  const file = event.target.files[0];
+  if (!file) return;
 
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      try {
-        const importedData = JSON.parse(e.target.result);
-        
-        // Check if the imported data has columns
-        if (Array.isArray(importedData)) {
-          // Merge tasks into existing columns
-          this.columns.forEach((column, index) => {
-            if (importedData[index]) {
-              // Merge tasks by appending
-              column.tasks = [...column.tasks, ...importedData[index].tasks];
-            }
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    try {
+      const importedData = JSON.parse(e.target.result);
+      
+      if (Array.isArray(importedData)) {
+        // Create a map of existing tasks by ID for quick lookup
+        const existingTasksMap = new Map();
+        this.columns.forEach(column => {
+          column.tasks.forEach(task => {
+            existingTasksMap.set(task.id, task);
           });
-          
-          this.saveTasksToLocalStorage();
-        } else {
-          alert("Invalid data format. Make sure the JSON file contains an array of columns.");
-        }
-      } catch (error) {
-        alert("Invalid JSON file.");
+        });
+
+        // Add new tasks or update existing tasks
+        this.columns.forEach((column, index) => {
+          if (importedData[index]) {
+            importedData[index].tasks.forEach(importedTask => {
+              const existingTask = existingTasksMap.get(importedTask.id);
+
+              if (!existingTask) {
+                // If the task does not exist, add it
+                column.tasks.push(importedTask);
+              } else if (JSON.stringify(importedTask) !== JSON.stringify(existingTask)) {
+                // If the task exists but has changed, update it
+                Object.assign(existingTask, importedTask);
+              }
+            });
+          }
+        });
+        
+        this.saveTasksToLocalStorage();
+      } else {
+        alert("Invalid data format. Make sure the JSON file contains an array of columns.");
       }
-    };
-    reader.readAsText(file);
-  },
+    } catch (error) {
+      alert("Invalid JSON file.");
+    }
+  };
+  reader.readAsText(file);
+},
 
     saveTasksToLocalStorage() {
       localStorage.setItem('scrumBoardColumns', JSON.stringify(this.columns));
