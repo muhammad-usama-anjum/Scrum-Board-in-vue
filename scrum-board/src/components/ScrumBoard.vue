@@ -51,7 +51,6 @@
       <div class="task-form">
         <h2>Add New Task</h2>
         <form @submit.prevent="submitTask">
-          <!-- Existing form fields remain unchanged -->
           <label for="task-title">Title:</label>
           <input type="text" id="task-title" v-model="task.title" required />
 
@@ -159,7 +158,7 @@ export default {
         assignee: '',
         dueDate: '',
         status: 'Backlog',
-        spentTime: 0,
+        spentTime: '',
         priority: 'normal'
       },
       activeTask: null,
@@ -225,7 +224,7 @@ export default {
       }
       
       this.task.id = uuidv4(); // Generate a unique ID for the task
-      this.columns[0].tasks.push({ ...this.task });
+      this.columns[0].tasks.unshift({ ...this.task });
       this.resetTaskForm();
       this.showForm = false;
       this.saveTasksToLocalStorage();
