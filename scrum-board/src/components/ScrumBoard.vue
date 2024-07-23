@@ -534,9 +534,13 @@ export default {
   
   .search-bar input {
     width: 100%;
-    padding: 5px;
+    padding: 6px 10px 6px 20px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    background-image: url('https://img.icons8.com/?size=100&id=84039&format=png&color=000000');
+  background-repeat: no-repeat;
+  background-size: 12%;
+  background-position: 2px 4px; 
   }
   
   .tasks {
