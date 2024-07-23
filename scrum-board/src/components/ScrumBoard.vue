@@ -52,7 +52,7 @@
                 <p>Spent Time: {{ task.spentTime }} hours</p>
               </div>
             </transition>
-            <a href="#" @click.prevent="openEditForm(task)" class="edit">Edit Task</a>
+            <button @click.stop="openEditForm(task)" class="edit">Edit Task</button>
           </div>
         </div>
       </div>
@@ -205,7 +205,7 @@ export default {
         description: '',
         assignee: '',
         dueDate: '',
-        status: 'Backlog',
+        status: '',
         spentTime: '',
         priority: 'normal'
       },
