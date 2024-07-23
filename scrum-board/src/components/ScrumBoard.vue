@@ -146,7 +146,7 @@ export default {
         description: '',
         assignee: '',
         dueDate: '',
-        status: 'todo',
+        status: 'Backlog',
         spentTime: 0,
         priority: 'normal'
       },
@@ -156,7 +156,7 @@ export default {
         description: '',
         assignee: '',
         dueDate: '',
-        status: 'todo',
+        status: 'Backlog',
         spentTime: 0,
         priority: 'normal'
       },
