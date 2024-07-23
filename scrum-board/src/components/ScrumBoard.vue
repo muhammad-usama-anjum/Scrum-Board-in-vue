@@ -76,7 +76,8 @@
         </select>
 
         <label for="task-spent-time">Spent Time (hours):</label>
-        <input type="number" id="task-spent-time" v-model.number="task.spentTime" :min="0" required />
+<input type="number" id="task-spent-time" v-model.number="task.spentTime" :min="0" step="0.01" required />
+
 
         <label for="task-priority">Priority:</label>
         <select id="task-priority" v-model="task.priority" required>
