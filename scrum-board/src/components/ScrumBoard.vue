@@ -63,17 +63,6 @@
         <label for="task-due-date">Due Date:</label>
         <input type="date" id="task-due-date" v-model="task.dueDate" :min="todayDate" required />
 
-        <label for="task-status">Status:</label>
-        <select id="task-status" v-model="task.status" required>
-          <option value="Todo">To Do</option>
-            <option value="Open">Open</option>
-            <option value="New task">New Task</option>
-            <option value="In progress">In Progress</option>
-            <option value="Feedback needed">Feedback needed</option>
-            <option value="Ready for testing">Ready for testing</option>
-            <option value="QA in progress">QA in progress</option>
-            <option value="Done">Done</option>
-        </select>
 
         <label for="task-spent-time">Spent Time (hours):</label>
 <input type="number" id="task-spent-time" v-model.number="task.spentTime" :min="0" step="0.01" required />
@@ -110,17 +99,6 @@
           <label for="edit-task-due-date">Due Date:</label>
           <input type="date" id="edit-task-due-date" v-model="editedTask.dueDate" required/>
 
-          <label for="edit-task-status">Status:</label>
-          <select id="edit-task-status" v-model="editedTask.status" required>
-            <option value="Todo">To Do</option>
-            <option value="Open">Open</option>
-            <option value="New task">New Task</option>
-            <option value="In progress">In Progress</option>
-            <option value="Feedback needed">Feedback needed</option>
-            <option value="Ready for testing">Ready for testing</option>
-            <option value="QA in progress">QA in progress</option>
-            <option value="Done">Done</option>
-          </select>
 
 
           <label for="edit-task-spent-time">Spent Time (hours):</label>
