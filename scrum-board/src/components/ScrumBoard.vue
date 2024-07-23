@@ -103,8 +103,9 @@
           </div>
 
           <div class="form-buttons">
-            <button type="submit">Submit</button>
             <button type="button" @click="closeForm">Cancel</button>
+            <button type="submit">Submit</button>
+          
           </div>
         </form>
       </div>
@@ -156,8 +157,9 @@
 
 
           <div class="form-buttons">
-            <button type="submit">Submit</button>
             <button type="button" @click="cancelEdit">Cancel</button>
+            <button type="submit">Submit</button>
+           
           </div>
         </form>
       </div>
