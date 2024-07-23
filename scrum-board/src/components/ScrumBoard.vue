@@ -130,7 +130,7 @@
           <input
             type="number"
             id="edit-task-spent-time"
-            v-model.number="task.spentTime"
+            v-model.number="editedTask.spentTime"
             :min="0"
             step="0.01"
             required
