@@ -580,6 +580,7 @@ export default {
 }
 
 .task {
+  word-wrap: break-word;
   background-color: #f5f5f5;
   border: 1px solid #ddd;
   border-radius: 4px;
