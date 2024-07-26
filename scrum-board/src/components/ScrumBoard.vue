@@ -542,7 +542,7 @@ export default {
 .column {
   flex: 1;
   min-width: 187px;
-  max-width: 300px;
+  max-width: 200px;
   border: 1px solid #ccc;
   border-radius: 4px;
   padding: 10px;
@@ -589,6 +589,7 @@ export default {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition: background-color 0.3s;
+  
 }
 
 .edit-task-priority {
@@ -654,6 +655,11 @@ export default {
   font-size: 14px;
   margin: 0 0 5px;
   font-weight: bold;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: nowrap; /* Ensure text wraps within the title */
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .task p {
@@ -796,15 +802,19 @@ select {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1000; 
 }
 
 .modal-content {
+  width: 80%;
+  max-width: 600px; 
   background-color: white;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  max-width: 80%;
-  overflow-y: auto;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  max-height: 80vh;
+  overflow-y: auto; 
+  word-wrap: break-word;
 }
 
 .modal-content h2 {
