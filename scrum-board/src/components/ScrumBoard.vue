@@ -414,6 +414,10 @@ export default {
   flex-direction: column;
   align-items: center;
   background-color: black;
+  height: 100vh;
+  justify-content: flex-start;
+  padding-top: 20px;
+  box-sizing: border-box;
 }
 
 .scrum-board h1 {
